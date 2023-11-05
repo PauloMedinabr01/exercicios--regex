@@ -2,7 +2,7 @@
 
 include __DIR__ . '/style.php';
 
-echo '<h1>Exercícios Expressões Regulares - 2</h1>';
+echo '<h1>Exercícios Expressões Regulares - 1</h1>';
 
 echo '<hr><h2>Exemplo 1 - Classes de caracteres</h2>';
 
