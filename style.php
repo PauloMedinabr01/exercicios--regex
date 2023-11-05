@@ -1,5 +1,6 @@
 <style>
     html, body {
+        font-family: sans-serif;
         background-color: #333;
         color: #eee;
         padding-bottom: 100%;
