@@ -2,193 +2,283 @@
 
 include __DIR__ . '/style.php';
 
-echo '<h1>Exercícios Expressões Regulares - 1</h1>';
+echo '<h1>Exercícios Expressões Regulares - 2</h1>';
 
-echo '<hr><h2>Exemplo 1 - Estrutura</h2><hr>';
-$padrao = '/youtube/';
-$fonte = 'Videos do youtube';
+echo '<hr><h2>Exemplo 1 - Classes de caracteres</h2>';
+
+echo '<h3>1.1 - Palavras e espaços</h3><hr>';
+
+$padrao = '/^[a-zA-Z0-9 ]+/';
+// Padrão que permite letras maiúsculas, letras minúsculas, números e espaços
+
+$fonte = 'teste de regex';
+// Texto de origem a ser verificado
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 2 - Início e Fim</h2>';
-$padrao = '/^youtube/'; // Começa com
-$padrao = '/youtube$/'; // Termina com
-$padrao = '/^youtube$/'; // Deve começar e terminar com
-$fonte = 'Videos do youtube';
+echo '<h3>1.2 - Caracteres numéricos</h3><hr>';
+
+$padrao = '/^[0-9]+/';
+// Padrão que permite apenas números
+
+$fonte = '1234';
+// Texto de origem contendo números
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 3 - Conjuntos</h2>';
-$padrao = '/[tube]/'; // Valida um conjunto de caracteres
-$padrao = '/[a-z]/'; // Valida letras minúsculas
-$padrao = '/[A-Z]/'; // Valida letras maiúsculas
-$padrao = '/[a-zA-Z]/'; // Valida letras maiúsculas e minúsculas
-$padrao = '/[0-9]/'; // Valida dígitos
-$padrao = '/[0-9a-zA-Z]/'; // Valida números e letras
-$padrao = '/[0-9a-zA-Z\-]/'; // Valida números, letras e hífen (escapando o hífen)
-$fonte = 'YOUTUBE-2023';
+echo '<h3>1.3 - Negando classes e conjuntos</h3><hr>';
+
+$padrao = '/^[0-9]+/';
+// Padrão que permite apenas números
+
+$padrao = '/^\D+/';
+// Padrão que nega caracteres numéricos
+
+$padrao = '/^\w+/';
+// Padrão que permite caracteres alfanuméricos e underline
+
+$padrao = '/^\W+/';
+// Padrão que nega caracteres alfanuméricos e underline
+
+$padrao = '/^\s+/';
+// Padrão que nega espaços, tabulações e quebras de linha
+
+$padrao = '/^\S+/';
+// Padrão que nega espaços, tabulações e quebras de linha
+
+$fonte = '$$ $$';
+// Texto de origem com caracteres diversos
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 4 - Ocorrências Definidas</h2>';
-$padrao = '/^[0-9]{4}[a-z]{2,4}$/'; // Valida 4 números seguidos de 2 a 4 letras
-$fonte = '1211yout';
+echo '<h3>1.4 - Fronteiras</h3><hr>';
+
+$padrao = '/\bpropor/';
+// Padrão que verifica a palavra "propor" no início de uma palavra
+
+$fonte = 'ação de proporcionar algo';
+// Texto de origem
+
+$padrao = '/propor\b/';
+// Padrão que verifica a palavra "propor" no final de uma palavra
+
+$fonte = 'ação de proporcionar, de propor algo';
+// Texto de origem
+
+$padrao = '/\bpropor\b/';
+// Padrão que verifica a palavra "propor" como uma palavra completa
+
+$fonte = 'ação de proporcionar, de propor algo';
+// Texto de origem
+
+$padrao = '/lar\B/';
+// Padrão que verifica a palavra "lar" como parte de outra palavra
+
+$fonte = 'Você pode falar';
+// Texto de origem
+
+$padrao = '/lar\B/';
+// Padrão que verifica a palavra "lar" como parte de outra palavra
+
+$fonte = 'Frio combina com lareira';
+// Texto de origem
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 5 - Ocorrências (Nenhuma ou Uma Ocorrência)</h2>';
-$padrao = '/jpe?g/'; // Valida "jpg" com ou sem "e"
-$fonte = 'jpg';
+echo '<hr><h2>Exemplo 2.1 - Flags</h2>';
+
+echo '<h3>2.1 - Case Insensitive</h3><hr>';
+
+$padrao = '/^[a-zA-Z ]+/';
+// Padrão que permite letras maiúsculas, letras minúsculas e espaços
+
+$padrao = '/^[a-z ]+/i';
+// Padrão que permite letras minúsculas e espaços, ignorando a diferença entre maiúsculas e minúsculas
+
+$padrao = '/^[\w ]+/i';
+// Padrão que permite caracteres alfanuméricos e espaços, ignorando a diferença entre maiúsculas e minúsculas
+
+$fonte = 'teste de REGEX';
+// Texto de origem
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem, ignorando a diferença entre maiúsculas e minúsculas
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 6 - Ocorrências (Nenhuma ou N Ocorrências)</h2>';
-// Exemplo 6 - Ocorrências (Nenhuma ou N Ocorrências)
-$padrao = '/^teste*$/'; // Valida "teste" com zero ou mais "e"
-$padrao = '/^teste.*legal$/'; // Valida "teste" seguido de qualquer coisa e "legal"
-$fonte = 'teste bem legal';
+echo '<h3>2.2 - Multi Linhas</h3><hr>';
+
+$padrao = '/^expressao$/i';
+// Padrão que verifica a palavra "expressao" no início de uma linha, ignorando a diferença entre maiúsculas e minúsculas
+
+$fonte = 'expressao';
+// Texto de origem
+
+$padrao = '/^expressao$/i';
+// Padrão que verifica a palavra "expressao" no início de uma linha, ignorando a diferença entre maiúsculas e minúsculas
+
+$fonte = 'expressao
+expressao';
+// Texto de origem com quebras de linha
+
+$padrao = '/^expressao$/im';
+// Padrão que verifica a palavra "expressao" no início de uma linha, ignorando a diferença entre maiúsculas e minúsculas e permitindo múltiplas linhas
+
+$fonte = 'expressao
+expressao';
+// Texto de origem com quebras de linha
+
 $resultado = preg_match($padrao, $fonte);
+// Verifica se o padrão ocorre no texto de origem, considerando múltiplas linhas
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 7 - Ocorrências (Ao Menos Uma Ocorrência)</h2>';
-$padrao = '/^[0-9a-zA-Z\-]+\.txt$/'; // Valida alfanuméricos, hífen, ponto e "txt"
-$fonte = 'teste-legal.txt';
-$resultado = preg_match($padrao, $fonte);
+echo '<h3>2.3 - Busca Global</h3><hr>';
 
-echo '<h2>Padrão:</h2>'. "<pre>";
+$padrao = '/expressao/im';
+// Padrão que verifica a palavra "expressao" em qualquer posição do texto, ignorando a diferença entre maiúsculas e minúsculas
+
+$fonte = 'expressao expressao';
+// Texto de origem
+
+$resultado = preg_match($padrao, $fonte, $matches);
+// Verifica a primeira ocorrência do padrão no texto de origem e armazena as correspondências em $matches
+
+$padrao = '/^([\w]+) (wdev)$/im';
+// Padrão que verifica duas palavras separadas por espaço, ignorando a diferença entre maiúsculas e minúsculas, em múltiplas linhas
+
+$fonte = 'canal wdev
+youtube wdev';
+// Texto de origem
+
+$resultado = preg_match_all($padrao, $fonte, $matches);
+// Verifica todas as ocorrências do padrão no texto de origem e armazena as correspondências em $matches
+
+echo '<h2>Padrão:</h2>' . "<pre>";
 print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Fonte:</h2>'. "<pre>";
+echo '<h2>Fonte:</h2>' . "<pre>";
 print_r($fonte);
 echo "</pre><hr>";
 
 echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
+echo '<h2>Resultado:</h2>' . "<pre>";
 var_dump($resultado);
 echo "</pre><hr>";
 
-echo '<h2>Exemplo 8 - Grupos</h2>';
-$padrao = '/^([0-9a-zA-Z\-]+)(\.)(txt)$/'; // Valida grupos: (grupo 1), (grupo 2), (grupo 3)
-$fonte = 'teste-legal.txt';
-$resultado = preg_match($padrao, $fonte, $matches); // Parâmetro $matches recebe os grupos
-
-echo '<h2>Padrão:</h2>'. "<pre>";
-print_r($padrao);
-echo "</pre><hr>";
-
-echo '<h2>Fonte:</h2>'. "<pre>";
-print_r($fonte);
-echo "</pre><hr>";
-
-echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
-var_dump($resultado);
-echo "</pre><hr>";
-
-echo "<pre>";
-var_dump($matches);
-echo "</pre><hr>";
-
-echo '<h2>Exemplo 9 - Replace com Grupos</h2>';
-$padrao = '/^([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})$/'; // Valida grupos
-$fonte = '12345678910';
-$resultado = preg_match($padrao, $fonte, $matches); // Parâmetro $matches recebe os grupos
-$replace = preg_replace($padrao, '$1.$2.$3-$4', $fonte);
-// Utiliza a função preg_replace para substituir o padrão encontrado em $fonte
-// Padrão: $1 representa o primeiro grupo de captura, $2 o segundo, $3 o terceiro e $4 o quarto
-// Os grupos de captura correspondem a partes do texto que atendem ao padrão
-// O resultado será a substituição desses grupos de captura por $1.$2.$3-$4
-
-echo '<h2>Padrão:</h2>'. "<pre>";
-print_r($padrao);
-echo "</pre><hr>";
-
-echo '<h2>Fonte:</h2>'. "<pre>";
-print_r($fonte);
-echo "</pre><hr>";
-
-echo '<h2>0 = false, 1 = true</h2>';
-echo '<h2>Resultado:</h2>'. "<pre>";
-var_dump($resultado);
-echo "</pre><hr>";
-
-echo "<pre>";
+echo '<h2>Matches:</h2>' . "<pre>";
 print_r($matches);
+echo "</pre>";
+
+echo '<h3>3 - Remover Caracteres Indesejados</h3><hr>';
+
+$padrao = '/\D/';
+// Padrão que verifica caracteres não numéricos
+
+$fonte = '123.456.789-10';
+// Texto de origem com números e caracteres não numéricos
+
+$fonte = '+55 (11) 98745-3214';
+// Texto de origem com números e caracteres não numéricos
+
+$resultado = preg_match($padrao, $fonte, $matches);
+// Verifica a presença de caracteres não numéricos no texto de origem e armazena as correspondências em $matches
+
+$replace = preg_replace($padrao, '', $fonte);
+// Remove todos os caracteres não numéricos do texto de origem
+
+echo '<h2>Padrão:</h2>' . "<pre>";
+print_r($padrao);
 echo "</pre><hr>";
 
-echo '<h2>Resultado após o replace:</h2>'. "<pre>";
-print_r($replace);
+echo '<h2>Fonte:</h2>' . "<pre>";
+print_r($fonte);
 echo "</pre><hr>";
+
+echo '<h2>0 = false, 1 = true</h2>';
+echo '<h2>Resultado:</h2>' . "<pre>";
+var_dump($resultado);
+echo "</pre><hr>";
+
+echo '<h2>Replace:</h2>' . "<pre>";
+print_r($replace);
+echo "</pre>";
